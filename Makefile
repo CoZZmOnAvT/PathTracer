@@ -14,13 +14,7 @@ NAME		=	RT
 
 CC			=	gcc
 
-OS			=	$(shell uname)
-
-ifeq ($(OS), Linux)
-	CFLAGS		=	-Wextra -Wall -O3 -g3
-else
-	CFLAGS		=	-Wextra -Werror -Wall -O2 -flto=thin -g3
-endif
+CFLAGS		=	-Wextra -Wall -O3 -g3
 
 HDRSDIR		=	./includes
 
@@ -54,24 +48,7 @@ LIBSDEPS	=	$(addprefix $(LIBFOLDER)/, libft/libft.a sgl/libsgl.a)
 INCLUDES	=	-I./includes
 INCLUDES	+=	$(addprefix -I$(LIBFOLDER)/, libft sgl)
 
-ifeq ($(OS), Linux)
-	FRAMEWORKS	=	`sdl2-config --cflags --libs` -lSDL2 -lSDL2_image -lSDL2_mixer
-					-lSDL2_ttf -lm -lOpenCL
-else
-	INCLUDES	+=	-I./frameworks/SDL2.framework/Headers
-	INCLUDES	+=	-I./frameworks/SDL2_ttf.framework/Headers
-	INCLUDES	+=	-I./frameworks/SDL2_image.framework/Headers
-	INCLUDES	+=	-F./frameworks
-
-	FRAMEWDIR	=	frameworks
-
-	FRAMEWORKS	=	$(addprefix -F./, $(FRAMEWDIR))
-	FRAMEWORKS	+=	$(addprefix -rpath @executable_path/, $(FRAMEWDIR))
-	FRAMEWORKS	+=	-framework OpenGL -framework AppKit -framework OpenCl		\
-					-framework SDL2 -framework SDL2_ttf -framework SDL2_image
-endif
-
-LIBRARIES	=	$(addprefix -L$(LIBFOLDER)/, libft sgl) -lft -lsgl
+LIBRARIES	=	$(addprefix -L$(LIBFOLDER)/, libft sgl) -lOpenCL -lsgl -lft `sdl2-config --libs` -lm -pthread -lSDL2_ttf -lSDL2_image -lSDL2_mixer
 
 all: lib $(NAME)
 

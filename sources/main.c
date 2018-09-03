@@ -22,7 +22,7 @@ int		main(int ac, char **av)
 	process_kernels(&env);
 	init_controls(&env);
 	init_scene(&env);
-	while (true)
+	while (1)
 	{
 		!env.flags.pause ? render_scene(&env) : 0;
 		!env.flags.pause && env.flags.effect ? apply_effect(&env) : 0;
