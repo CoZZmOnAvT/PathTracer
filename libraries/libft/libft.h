@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: grevenko <grevenko@student.42.fr>          +#+  +:+       +#+        */
+/*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/04 13:45:39 by pgritsen          #+#    #+#             */
-/*   Updated: 2018/06/07 20:29:23 by grevenko         ###   ########.fr       */
+/*   Updated: 2018/08/26 20:09:58 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ int				ft_strcmp(const char *s1, const char *s2);
 
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 
+char			*ft_str_replace(char *src, char b, char t);
+
 int				ft_atoi(const char *s);
 
 intmax_t		ft_atol_base(const char *s, int base);
@@ -194,6 +196,8 @@ int				ft_strequ(char const *s1, char const *s2);
 int				ft_strnequ(char const *s1, char const *s2, size_t n);
 
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
+
+char			*ft_vstrjoin(int n, ...);
 
 char			*ft_strjoin(char const *s1, char const *s2);
 
@@ -298,6 +302,12 @@ double			ft_atof(const char *src);
 void			*ft_memjoin(const void *m1, const void *m2,
 							size_t b1, size_t b2);
 
+uint64_t		ft_clamp(uint64_t min, uint64_t max, uint64_t val);
+
+size_t			ft_cinustr(const char *s);
+size_t			ft_cinustrn(const char *s, size_t n);
+size_t			ft_cinustrcn(const char *s, size_t n);
+
 /*
 **		Circular double linked list functions
 */
@@ -308,6 +318,8 @@ void			ft_dlstpush(t_dlist **dest, t_dlist *src);
 
 void			ft_dlstpush_back(t_dlist **dest, t_dlist *src);
 
+void			ft_dlstdelelem_cs(t_dlist **del);
+
 void			ft_dlstdelelem(t_dlist **del);
 
 void			ft_dlstclear(t_dlist **dlst);
@@ -317,5 +329,9 @@ size_t			ft_dlstsize(t_dlist *dlst);
 void			ft_dlstpop(t_dlist *dlst);
 
 void			ft_dlstpop_back(t_dlist *dlst);
+
+t_dlist			*ft_dlstmerge(t_dlist **a, t_dlist **b);
+
+t_dlist			*ft_strsplit_dlst(char const *s, char c);
 
 #endif

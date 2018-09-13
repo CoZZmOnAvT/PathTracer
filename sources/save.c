@@ -105,7 +105,7 @@ void	save_scene(t_env *e)
 	sprintf(scene_path, "./resources/scenes/scene_%ld.sc", time(NULL));
 	if ((fd = open(scene_path, O_WRONLY | O_CREAT, S_IWUSR | S_IRUSR)) != -1)
 	{
-		write(fd, buf, len);
+		fd = write(fd, buf, len);
 		ft_printf("{green}Scene successfully saved to '%s'{nc}\n", scene_path);
 	}
 	free(buf);

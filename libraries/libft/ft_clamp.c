@@ -1,20 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_clamp.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/26 16:17:25 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/10 14:58:30 by pgritsen         ###   ########.fr       */
+/*   Created: 2018/08/26 12:53:51 by pgritsen          #+#    #+#             */
+/*   Updated: 2018/08/26 12:55:16 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char const *s, int fd)
+uint64_t	ft_clamp(uint64_t min, uint64_t max, uint64_t val)
 {
-	if (!s)
-		return ;
-	fd = write(fd, s, ft_strlen(s));
+	if (val < min)
+		return (min);
+	else if (val > max)
+		return (max);
+	else
+		return (val);
 }

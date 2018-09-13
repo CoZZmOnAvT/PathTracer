@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_dlstdelelem_cs.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/26 16:17:25 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/10 14:58:30 by pgritsen         ###   ########.fr       */
+/*   Created: 2018/01/08 20:53:36 by pgritsen          #+#    #+#             */
+/*   Updated: 2018/01/09 17:51:26 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char const *s, int fd)
+void	ft_dlstdelelem_cs(t_dlist **del)
 {
-	if (!s)
+	if (!del || !*del)
 		return ;
-	fd = write(fd, s, ft_strlen(s));
+	(*del)->next->prev = (*del)->prev;
+	(*del)->prev->next = (*del)->next;
+	ft_memdel((void **)del);
 }

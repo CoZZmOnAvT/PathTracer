@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_dlstmerge.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/10/26 16:17:25 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/10 14:58:30 by pgritsen         ###   ########.fr       */
+/*   Created: 2018/09/02 14:09:32 by pgritsen          #+#    #+#             */
+/*   Updated: 2018/09/02 14:09:39 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_fd(char const *s, int fd)
+t_dlist		*ft_dlstmerge(t_dlist **a, t_dlist **b)
 {
-	if (!s)
-		return ;
-	fd = write(fd, s, ft_strlen(s));
+	if (!a)
+		return (NULL);
+	else if (!b)
+		return (*a);
+	else if (!*a || !*b)
+		return (*a = *b);
+	(*a)->next->prev = (*b)->prev;
+	(*b)->next->prev = (*a);
+	(*b)->prev->next = (*a)->next;
+	(*a)->next = (*b)->next;
+	ft_memdel((void **)&(*b)->content);
+	ft_memdel((void **)b);
+	return (*a);
 }

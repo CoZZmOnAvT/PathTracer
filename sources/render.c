@@ -70,12 +70,10 @@ void		render_scene(t_env *env)
 	uint		random_seed;
 	char		smooth;
 	cl_int		err;
-	int			it;
 
 	kl = env->cam->kl.kernel;
 	env->scene.sampls++;
 	err = 0;
-	it = -1;
 	smooth = 1 + (env->flags.effect == ANTIALIASING) * 2;
 	random_seed = rand();
 	err |= clSetKernelArg(kl, 5, sizeof(uint), &random_seed);

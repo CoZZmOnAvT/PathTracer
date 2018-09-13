@@ -6,7 +6,7 @@
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/01 17:14:17 by pgritsen          #+#    #+#             */
-/*   Updated: 2017/12/10 14:57:29 by pgritsen         ###   ########.fr       */
+/*   Updated: 2018/09/02 14:07:18 by pgritsen         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ static void	node_del(void *content, size_t content_size)
 {
 	ft_bzero(content, content_size);
 	ft_memdel(&content);
-	content_size = 0;
 }
 
 t_list		*ft_lstmap(t_list *lst, t_list *(*f)(t_list *elem))

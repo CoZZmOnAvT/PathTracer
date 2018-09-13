@@ -39,13 +39,11 @@ void				parse_obj_figure(t_dlist *row, t_dlist *rows,
 	uint	vt_i;
 	uint	vn_i;
 	uint	v_i;
-	uint	f_i;
 	int		i;
 
 	vt_i = 0;
 	vn_i = 0;
 	v_i = 0;
-	f_i = 0;
 	i = -1;
 	while ((row = row->next) != rows)
 		if (!ft_strncmp(row->content, "mtllib ", 7) && !e->scene.fig->materials)

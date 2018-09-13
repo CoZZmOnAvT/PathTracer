@@ -37,7 +37,7 @@ void		screenshot(t_env *env)
 				((uint *)env->win->surf->pixels)[it] >> 16 & 0xFF,
 				((uint *)env->win->surf->pixels)[it] >> 8 & 0xFF,
 				((uint *)env->win->surf->pixels)[it] & 0xFF);
-		write(fd, str, len);
+		it = write(fd, str, len);
 		ft_printf("{green}Screenshot successfully saved to '%s'{nc}\n", name);
 	}
 	free(str);

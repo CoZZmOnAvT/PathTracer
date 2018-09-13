@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strsplit_lst.c                                  :+:      :+:    :+:   */
+/*   ft_strsplit_dlst.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pgritsen <pgritsen@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,34 +12,34 @@
 
 #include "libft.h"
 
-static void		node_del(void *content, size_t content_size)
+static inline void 	*protocol_clean(t_dlist **dlst, void *data)
 {
-	ft_bzero(content, content_size);
-	ft_memdel(&content);
+	ft_dlstclear(dlst);
+	free(data);
+	return (NULL);
 }
 
-t_list			*ft_strsplit_lst(char const *s, char c)
+t_dlist				*ft_strsplit_dlst(char const *s, char c)
 {
-	t_list	*list;
-	t_list	*tmp;
-	char	**splitted;
-	ssize_t	it;
+	size_t	offset;
+	char	*part;
+	t_dlist	*dlst;
+	t_dlist	*new;
 
-	list = NULL;
-	if (!s)
+	if (!s--)
 		return (NULL);
-	else if (!(splitted = ft_strsplit(s, c)))
-		return (NULL);
-	it = -1;
-	while (splitted[++it])
-	{
-		if (!(tmp = ft_lstnew(splitted[it], sizeof(void *))))
+	dlst = NULL;
+	while (*++s)
+		if (*s != c && (offset = ft_strclen(s, c)))
 		{
-			ft_lstdel(&list, &node_del);
-			return (NULL);
+			if (!(part = ft_strsub(s, 0, offset)))
+				return (protocol_clean(&dlst, part));
+			else if (!(new = ft_dlstnew(part, offset)))
+				return (protocol_clean(&dlst, part));
+			ft_dlstpush(&dlst, new);
+			if (!dlst)
+				return (protocol_clean(&dlst, part));
+			s += offset - 1;
 		}
-		ft_lstadd_back(&list, tmp);
-	}
-	free(splitted);
-	return (list);
+	return (dlst);
 }

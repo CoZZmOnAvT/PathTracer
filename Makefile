@@ -14,7 +14,10 @@ NAME		=	RT
 
 CC			=	gcc
 
-CFLAGS		=	-Wextra -Wall -O3 -g3
+CFLAGS		+=	-Wextra -Wextra -Wall -O3 -g3 -fno-unwind-tables				\
+				-fno-asynchronous-unwind-tables
+BFLAGS		=	-s -ffunction-sections -fdata-sections	-fno-ident				\
+				-fmerge-all-constants
 
 HDRSDIR		=	./includes
 
@@ -54,7 +57,7 @@ all: lib $(NAME)
 
 $(NAME): $(DIRS) $(OBJ) $(HDRS) $(LIBSDEPS)
 	@printf "\n\033[32m[Creating $(NAME)].......\033[0m"
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIBRARIES) $(FRAMEWORKS)
+	@$(CC) $(CFLAGS) $(BFLAGS) -o $(NAME) $(OBJ) $(LIBRARIES) $(FRAMEWORKS)
 	@printf "\033[32m[DONE]\033[0m\n"
 
 $(DIRS):
