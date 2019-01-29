@@ -51,7 +51,7 @@ float2			intersect_ray_mandelbulb(float3 O, float3 D, t_obj *obj)
 		return (sphere);
 
 	float totalDistance = 0.0f;
-	float steps;
+	int   steps;
 	for (steps = 0.0F; steps < 100.0F; steps++)
 	{
 		float3 p = O + totalDistance * D;
@@ -60,6 +60,6 @@ float2			intersect_ray_mandelbulb(float3 O, float3 D, t_obj *obj)
 		if (distance < 0.0005f)
 			break;
 	}
-	obj->spec = 1.0F - steps / 100.0F;
+	obj->spec = 1.0F - (float)steps / 100.0F;
 	return ((float2){totalDistance, INFINITY});
 }

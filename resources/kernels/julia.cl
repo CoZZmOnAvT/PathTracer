@@ -16,7 +16,7 @@ float2			intersect_ray_julia(float3 O, float3 D, t_obj *obj)
 	float	normZ;
 	float	normZP;
 	float4	R = {O, 0.0F};
-	float	steps = 0;
+	int		steps = 0;
 
 	do
 	{
@@ -45,6 +45,6 @@ float2			intersect_ray_julia(float3 O, float3 D, t_obj *obj)
 			return ((float2){INFINITY, INFINITY});
 	}
 	while (dist > EPSILON * 50.0F);
-	obj->spec = 1.0F - steps / 40.0F;
+	obj->spec = 1.0F - (float)steps / 40.0F;
 	return ((float2){fast_distance(O, R.xyz), INFINITY});
 }
